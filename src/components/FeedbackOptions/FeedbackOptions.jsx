@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types';
-import VoteButton from './VoteButton';
 import css from './FeedbackOptions.module.css';
 
-const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+const FeedbackOptions = ({onLeaveFeedback }) => {
   return (
     <div className={css.feedbackBtns}>
-      {Object.keys(options).map(option => (
-        <VoteButton
-          name={option}
-          key={option}
-          onLeaveFeedback={onLeaveFeedback}
-        />
-      ))}
+      <button className={css.good} name="good" onClick={onLeaveFeedback}>
+        Good
+      </button>
+      <button className={css.neutral} name="neutral" onClick={onLeaveFeedback}>
+        Neutral
+      </button>
+      <button className={css.bad} name="bad" onClick={onLeaveFeedback}>
+        Bad
+      </button>
     </div>
   );
 };
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.shape({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }),
   onLeaveFeedback: PropTypes.func.isRequired,
 };
 

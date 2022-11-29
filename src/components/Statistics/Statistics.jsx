@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import css from './Statistics.module.css';
 import Notification from './Notification';
 
-const Statistics = ({
-  good,
-  neutral,
-  bad,
-  total,
-  positivePercentage,
-}) => {
+const Statistics = ({ good, neutral, bad }) => {
+const total = good + neutral + bad;
+const positiveFeedbackPercentage = Math.round((good / total) * 100);
+
+  useEffect(() => {}, [good, neutral, bad]);
+
   return total ? (
     <table>
       <tbody>
@@ -32,7 +32,7 @@ const Statistics = ({
         </tr>
         <tr>
           <td>Positive feedback:</td>
-          <td>{positivePercentage}%</td>
+          <td>{positiveFeedbackPercentage}%</td>
         </tr>
       </tfoot>
     </table>
@@ -45,8 +45,6 @@ Statistics.propTypes = {
   good: PropTypes.number.isRequired,
   neutral: PropTypes.number.isRequired,
   bad: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  positivePercentage: PropTypes.number.isRequired,
 };
 
 export default Statistics;
